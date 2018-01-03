@@ -83,7 +83,7 @@ def _set_webhook():
 
 
 
-states = ['no_class','class','in_class','go_home']
+states = ['no_class','class','in_class','go_home','fail','quit']
 transitions = [
 ['new_class', 'no_class', 'class'],
 ['sign_in', 'class', 'in_class'],
@@ -104,6 +104,7 @@ machine = Machine(model = life_bot, states = states, transitions =transitions,in
 
 class_num=1
 class_score=0
+
 @app.route('/hook', methods=['POST'])
 def webhook_handler():
     if request.method == "POST":
@@ -112,19 +113,18 @@ def webhook_handler():
         recv=update.message.text
         global class_num
         global class_score
+        global stu_num
         #conn = connect(db_name)
         if life_bot.state == 'no_class':
-            if recv == '開始上課':
-               life_bot.new_class()
-               text = '準備上課'+life_bot.state+str(class_num)
-               update.message.reply_text(text)
-            else:
-               update.message.reply_text('你沒事不去上學是要在家裡耍廢逆')
+            stu_num=recv
+            life_bot.new_class()
+            text = stu_num+'確認選課，準備開始上課'+life_bot.state+str(class_num)
+            update.message.reply_text(text)
 
         if life_bot.state == 'class':
             if recv == '簽到':
                life_bot.sign_in()
-               add_dvd(conn, 'computer_theory 2017', 2018, 1, 'F74041080')
+               add_dvd(conn, 'computer_theory 2017-1', 2017, class_num, stu_num)
                print(all_dvds(conn))
                update.message.reply_text('上課中')
             elif recv == '翹課':
