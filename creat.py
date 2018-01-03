@@ -78,9 +78,9 @@ def all_dvds(conn,update):
 """------------------------set_webhook------------------------"""
 
 app = Flask(__name__)
-bot = telegram.Bot(token='499538879:AAE41TcIJOevcrxqwdfTDA5oVPTSxxWe59Q')
+bot = telegram.Bot(token='505601931:AAE1nUePTa-lxg0ixTOTjKxeaZkgy-7V3R8')
 def _set_webhook():
-    status = bot.set_webhook('https://5cf62211.ngrok.io/hook')
+    status = bot.set_webhook('https://8b9afccf.ngrok.io/hook')
     if not status:
         print('Webhook setup failed')
         sys.exit(1)
@@ -198,25 +198,26 @@ def webhook_handler():
                text = '準備上課'+life_bot.state+str(class_num)
                update.message.reply_text(text)
             elif class_num==18:
+               chat_id=505601931
                class_score=class_num*6+class_score
                if(class_score>100):
-                    update.message.reply_photo(499538879,photo=open('over100.jpg', 'rb'))
+                    update.message.reply_photo(chat_id,photo=open('over100.jpg', 'rb'))
                     update.message.reply_text('超過一百分')
                     life_bot.you_pass()
                if(class_score<=100 and class_score>=70):
-                    update.message.reply_photo(499538879,photo=open('s70~100.jpg', 'rb'))
+                    update.message.reply_photo(chat_id,photo=open('s70~100.jpg', 'rb'))
                     update.message.reply_text('司句意！你超級棒der')
                     life_bot.you_pass()
                if(class_score<=69 and class_score>=60):
-                    update.message.reply_photo(499538879,photo=open('s60~69.jpg', 'rb'))
+                    update.message.reply_photo(chat_id,photo=open('s60~69.jpg', 'rb'))
                     update.message.reply_text('你要挺住阿！不要在混了')
                     life_bot.you_pass()
                if(class_score<=59 and class_score>=50):
-                    update.message.reply_photo(499538879,photo=open('s51~59.jpg', 'rb'))
+                    update.message.reply_photo(chat_id,photo=open('s51~59.jpg', 'rb'))
                     update.message.reply_text('真是太可惜，差一點，哈哈')
                     life_bot.you_fail()
                if(class_score<=50):
-                    update.message.reply_photo(499538879,photo=open('under50.jpg', 'rb'))
+                    update.message.reply_photo(chat_id,photo=open('under50.jpg', 'rb'))
                     update.message.reply_text('殘念')
                     life_bot.you_fail()
             elif recv != '回家' and recv != '翹課':
