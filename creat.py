@@ -80,7 +80,7 @@ def all_dvds(conn,update):
 app = Flask(__name__)
 bot = telegram.Bot(token='499538879:AAE41TcIJOevcrxqwdfTDA5oVPTSxxWe59Q')
 def _set_webhook():
-    status = bot.set_webhook('https://48ab384b.ngrok.io/hook')
+    status = bot.set_webhook('https://5cf62211.ngrok.io/hook')
     if not status:
         print('Webhook setup failed')
         sys.exit(1)
